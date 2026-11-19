@@ -28,7 +28,7 @@ process ENSEMBL_GENOME_DOWNLOAD {
       --include='softmasked.fa.bgz*' \
       --include='md5sum.txt' \
       --exclude='*' \
-      ${ftp_path}/ ./
+      ${ftp_path}/genome/ ./
 
     # Some files may be missing from md5sum.txt, let's not bother
     if grep -- "^softmasked\\.fa\\.bgz" md5sum.txt > md5checksums_restricted.txt

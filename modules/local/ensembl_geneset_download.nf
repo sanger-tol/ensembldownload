@@ -2,7 +2,7 @@
 // The module checks that the MD5 checksums match before releasing the data.
 // It also uncompresses the files, since we want bgzip compression.
 process ENSEMBL_GENESET_DOWNLOAD {
-    tag "${meta.assembly_accession}.${meta.method}.${meta.geneset_version}"
+    tag "${meta.id}"
     label 'process_single'
 
     conda "conda-forge::rsync=3.4.1"
@@ -23,7 +23,7 @@ process ENSEMBL_GENESET_DOWNLOAD {
     task.ext.when == null || task.ext.when
 
     script:
-    def filename_stem = "${meta.assembly_accession}.${meta.method}.${meta.geneset_version}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     rsync -av \
       --exclude='*/' \
@@ -32,7 +32,7 @@ process ENSEMBL_GENESET_DOWNLOAD {
       --include='cdna.fa.bgz*' \
       --include='md5sum.txt' \
       --exclude='*' \
-      ${ftp_path}/ ./
+      ${ftp_path}/geneset/ ./
 
     # Some files may be missing from md5sum.txt, let's not bother
     if grep "^\\(cdna\\.fa\\.bgz\\|genes\\.gff3\\.bgz\\|pep\\.fa\\.bgz\\)" md5sum.txt > md5checksums_restricted.txt
@@ -42,20 +42,20 @@ process ENSEMBL_GENESET_DOWNLOAD {
 
     for i in pep.fa.* genes.gff3.* cdna.fa.*
     do
-        mv \${i} ${filename_stem}.\${i/.bgz/.gz}
+        mv \${i} ${prefix}.\${i/.bgz/.gz}
     done
     """
 
     stub:
-    def filename_stem = "${meta.assembly_accession}.${meta.method}.${meta.geneset_version}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${filename_stem}.cdna.fa.gz
-    touch ${filename_stem}.cdna.fa.gz.fai
-    touch ${filename_stem}.cdna.fa.gz.gzi
-    touch ${filename_stem}.genes.gff3.gz
-    touch ${filename_stem}.genes.gff3.gz.csi
-    touch ${filename_stem}.pep.fa.gz
-    touch ${filename_stem}.pep.fa.gz.fai
-    touch ${filename_stem}.pep.fa.gz.gzi
+    touch ${prefix}.cdna.fa.gz
+    touch ${prefix}.cdna.fa.gz.fai
+    touch ${prefix}.cdna.fa.gz.gzi
+    touch ${prefix}.genes.gff3.gz
+    touch ${prefix}.genes.gff3.gz.csi
+    touch ${prefix}.pep.fa.gz
+    touch ${prefix}.pep.fa.gz.fai
+    touch ${prefix}.pep.fa.gz.gzi
     """
 }
