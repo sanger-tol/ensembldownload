@@ -18,19 +18,22 @@
 
 ## Introduction
 
-**sanger-tol/ensembldownload** is a pipeline that downloads gene annotations from Ensembl into a Tree of Life directory structure.
+**sanger-tol/ensembldownload** is a pipeline that downloads gene and repeat annotations from Ensembl into a Tree of Life directory structure.
 
 The pipeline takes a CSV file that contains assembly accession number, output directories, geneset methods and geneset versions.
-The pipeline downloads the Fasta files of the genes (cdna and protein sequences) as well as the GFF3 file.
+The pipeline then downloads from Ensembl the data associated with this geneset.
 All files are compressed with `bgzip`, and indexed with `samtools faidx` or `tabix`.
 
 Steps involved:
 
-- Download from Ensembl the GFF3 file, and the sequences of the genes in
-  Fasta format.
+- Download from Ensembl the gene annotation (GFF3 file and sequences of the
+  genes in Fasta format.
+- Download from Ensembl the masked genome (Fasta) and extract the coordinates
+  of the masked regions into a BED file.
 - Ensure all Fasta files are compressed with `bgzip` and indexed with
   `samtools faidx`.
-- Ensure all GFF3 files are compress with `bgzip` and indexed with `tabix`.
+- Ensure all GFF3 files are compressed with `bgzip` and indexed with `tabix`.
+- Ensure all BED files are compressed with `bgzip` and indexed with `tabix`.
 
 ## Usage
 

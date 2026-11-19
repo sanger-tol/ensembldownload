@@ -14,7 +14,7 @@ We version it as the successor of both original pipelines, hence v3.0.0._
   - The pipeline now merely downloads and renames the files to comply with the standard
     Genome After-Party file nomenclature.
   - Downloads happen with the rsync protocol.
-  - The pipeline will add extra analyses such as gene density tracks in a later release.
+  - The pipeline will add extra analyses such as gene and repeat density tracks in a later release.
 - Built with the nf-core template v4.2.0
 
 ### Parameters

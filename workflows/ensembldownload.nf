@@ -4,16 +4,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES/SUBWORKFLOWS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
-include { DOWNLOAD               } from '../subworkflows/local/download'
+include { DOWNLOAD                  } from '../subworkflows/local/download'
+include { SOFT_MASKED_FASTA_REPEATS } from '../subworkflows/sanger-tol/soft_masked_fasta_repeats/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,6 +41,16 @@ workflow ENSEMBLDOWNLOAD {
         ch_samplesheet
     )
 
+    // Match Fasta files and their FAI index to extract sequence statistics
+    ch_fasta_sequence_length = DOWNLOAD.out.genome
+        .map { meta, files -> tuple(meta, files.find { f -> f.name.endsWith('.fa.gz') }, files.find { f -> f.name.endsWith('.fai') }) }
+        .map { meta, fasta, fai -> tuple(meta, fasta, get_sequence_map(fai)) }
+        .map { meta, fasta, meta_fai -> tuple(meta + meta_fai, fasta, meta_fai.max_length) }
+
+    SOFT_MASKED_FASTA_REPEATS(
+        ch_fasta_sequence_length
+    )
+
     //
     // Collate and save software versions
     //
@@ -76,6 +81,32 @@ workflow ENSEMBLDOWNLOAD {
         )
     emit:
     versions = ch_collated_versions // channel: [ path(versions.yml) ]
+}
+
+// Read the .fai file to extract the number of sequences, the maximum and total sequence length
+// Inspired from https://github.com/nf-core/rnaseq/blob/3.10.1/lib/WorkflowRnaseq.groovy
+def get_sequence_map(fai_file) {
+    def n_sequences = 0
+    def max_length = 0
+    def total_length = 0
+    fai_file.eachLine { line ->
+        def lspl = line.split('\t')
+        // def chrom  = lspl[0]
+        def length = lspl[1].toLong()
+        n_sequences += 1
+        total_length += length
+        if (length > max_length) {
+            max_length = length
+        }
+    }
+
+    def sequence_map = [:]
+    sequence_map.n_sequences = n_sequences
+    sequence_map.total_length = total_length
+    if (n_sequences) {
+        sequence_map.max_length = max_length
+    }
+    return sequence_map
 }
 
 /*

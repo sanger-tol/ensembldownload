@@ -1,10 +1,21 @@
 {
     "-profile test": {
         "content": [
-            1,
+            4,
             {
+                "BGZIPTABIX": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
                 "ENSEMBL_GENESET_DOWNLOAD": {
                     "rsync": "3.4.1"
+                },
+                "ENSEMBL_GENOME_DOWNLOAD": {
+                    "rsync": "3.4.1"
+                },
+                "MASK_SOFTMASK2BED": {
+                    "seqtk": "1.4-r122",
+                    "softmask2bed": 1.0
                 },
                 "Workflow": {
                     "sanger-tol/ensembldownload": "v3.0.0"
@@ -23,7 +34,16 @@
                 "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai",
                 "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi",
                 "pipeline_info",
-                "pipeline_info/ensembldownload_software_versions.yml"
+                "pipeline_info/ensembldownload_software_versions.yml",
+                "repeats",
+                "repeats/ensembl",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.bed.gz",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.bed.gz.csi",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.bed.gz.gzi",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.bed.gz.tbi",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.masked.fa.gz",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.masked.fa.gz.fai",
+                "repeats/ensembl/GCA_907164925.1.repeats.ensembl.masked.fa.gz.gzi"
             ],
             [
                 "GCA_907164925.1.ensembl.2022_02.cdna.fa.gz:md5,7e8c07eefe2242c86e9e390f1de65084",
@@ -33,10 +53,17 @@
                 "GCA_907164925.1.ensembl.2022_02.genes.gff3.gz.csi:md5,fa51f3c6123ba0f0fb9e920b91e5374f",
                 "GCA_907164925.1.ensembl.2022_02.pep.fa.gz:md5,38ebdcafbac7f7439070be203cd43715",
                 "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai:md5,95b9f6b24f73af293a17c74eea5a8f29",
-                "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi:md5,bc0b925c1b01abaa6f0130750d1e41b0"
+                "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi:md5,bc0b925c1b01abaa6f0130750d1e41b0",
+                "GCA_907164925.1.repeats.ensembl.bed.gz:md5,50086d095f1ce425103401f3c77d1ad8",
+                "GCA_907164925.1.repeats.ensembl.bed.gz.csi:md5,65b3ce4940fbd1cb3b08f26e85f2e56b",
+                "GCA_907164925.1.repeats.ensembl.bed.gz.gzi:md5,f2282a205cbc29b671afde2a8d64b49c",
+                "GCA_907164925.1.repeats.ensembl.bed.gz.tbi:md5,8c904f1dc971ad62421bd4565eb7f1ff",
+                "GCA_907164925.1.repeats.ensembl.masked.fa.gz:md5,afe44da9a1db9225e8643f82dc5770c3",
+                "GCA_907164925.1.repeats.ensembl.masked.fa.gz.fai:md5,d2ad6cbd405b8baa792849bdf8c9a158",
+                "GCA_907164925.1.repeats.ensembl.masked.fa.gz.gzi:md5,829a5e0fe1e139c4360bd5946ad74fc9"
             ]
         ],
-        "timestamp": "2026-11-17T16:03:42.040438691",
+        "timestamp": "2026-11-19T11:36:56.985522425",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

@@ -6,7 +6,7 @@
 
 ## Introduction
 
-The pipeline downloads Enembl gene annotations for one of multiple assemblies.
+The pipeline downloads Enembl gene and repeat annotations for one of multiple assemblies.
 It also builds a set of common indices (such as `samtools faidx`, `tabix`).
 
 ## One-off downloads
@@ -22,7 +22,7 @@ The pipeline accepts command-one line arguments to specify a single genome to do
 nextflow run sanger-tol/ensembldownload -profile singularity --assembly_accession GCA_905163415.1 --annotation_method braker --geneset_version 2022_03 --outdir Noctua_fimbriata_braker_2022_03
 ```
 
-This will launch the pipeline and download the `2022_03` _Braker_ annotation of the assembly `GCA_905163415.1` into the `Noctua_fimbriata_braker_2022_03/` directory,
+This will launch the pipeline and download the data associated with the `2022_03` _Braker_ annotation of the assembly `GCA_905163415.1` into the `Noctua_fimbriata_braker_2022_03/` directory,
 which will be created if needed.
 
 Annotation parameters can be retrieved by browsing the [Ensembl](https://www.ensembl.org/) site.
@@ -62,7 +62,7 @@ Noctua_fimbriata/ilNocFimb1.1,GCA_905163415.1,braker,2022_03
 
 | Column               | Description                                                                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `outdir`             | Output directory for this annotation (evaluated from `--outdir` if a relative path). Analysis results are in a sub-directory `genes/$annotation_method/$geneset_version`. |
+| `outdir`             | Output directory for this annotation (evaluated from `--outdir` if a relative path). |
 | `assembly_accession` | Accession number of the assembly to download. Typically of the form `GCA_*.*`.                                                                                            |
 | `annotation_method`  | Name of the method of the geneset.                                                                                                                                        |
 | `geneset_version`    | Version of the geneset, usually in the form `YYYY_MM`.                                                                                                                    |
