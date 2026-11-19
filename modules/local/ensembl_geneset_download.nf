@@ -17,6 +17,7 @@ process ENSEMBL_GENESET_DOWNLOAD {
     tuple val(meta), path("*.cdna.fa.*"), emit: cdna
     tuple val(meta), path("*.genes.gff3.*"), emit: gff
     tuple val(meta), path("*.pep.fa.*"), emit: pep
+    tuple val(meta), path("*.xref.tsv.*"), emit: xref
     tuple val("${task.process}"), val('rsync'), eval("rsync --version | sed '1!d;s/^rsync  version //; s/ .*//'"), topic: versions
 
     when:
@@ -30,12 +31,13 @@ process ENSEMBL_GENESET_DOWNLOAD {
       --include='pep.fa.bgz*' \
       --include='genes.gff3.bgz*' \
       --include='cdna.fa.bgz*' \
+      --include='xref.tsv*' \
       --include='md5sum.txt' \
       --exclude='*' \
       ${ftp_path}/geneset/ ./
 
     # Some files may be missing from md5sum.txt, let's not bother
-    if grep "^\\(cdna\\.fa\\.bgz\\|genes\\.gff3\\.bgz\\|pep\\.fa\\.bgz\\)" md5sum.txt > md5checksums_restricted.txt
+    if grep "^\\(cdna\\.fa\\.bgz\\|genes\\.gff3\\.bgz\\|pep\\.fa\\.bgz\\|xref\\.tsv\\)" md5sum.txt > md5checksums_restricted.txt
     then
         md5sum -c md5checksums_restricted.txt
     fi
@@ -44,6 +46,7 @@ process ENSEMBL_GENESET_DOWNLOAD {
     do
         mv \${i} ${prefix}.\${i/.bgz/.gz}
     done
+    mv xref.tsv.gz ${prefix}.xref.tsv.gz
     """
 
     stub:
@@ -57,5 +60,6 @@ process ENSEMBL_GENESET_DOWNLOAD {
     touch ${prefix}.pep.fa.gz
     touch ${prefix}.pep.fa.gz.fai
     touch ${prefix}.pep.fa.gz.gzi
+    touch ${prefix}.xref.tsv.gz
     """
 }

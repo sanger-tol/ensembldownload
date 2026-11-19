@@ -57,6 +57,9 @@ workflow DOWNLOAD {
     ch_gff = ENSEMBL_GENESET_DOWNLOAD.out.gff
         .map { meta, gff -> tuple(meta + [id: gff.baseName], gff) }
 
+    ch_xref = ENSEMBL_GENESET_DOWNLOAD.out.xref
+        .map { meta, xref -> tuple(meta + [id: xref.baseName], xref) }
+
 
     // 2. Repeat masking
 
@@ -71,5 +74,6 @@ workflow DOWNLOAD {
     emit:
     genes  = ch_all_gene_fasta // meta, path: (cdna|cds|pep).fa
     gff    = ch_gff // meta, path: genes.gff
+    xref   = ch_xref // meta, path: xref.tsv
     genome = ch_genome_fasta // meta, path: genome.fa
 }

@@ -33,6 +33,7 @@
                 "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz",
                 "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai",
                 "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.xref.tsv.gz",
                 "pipeline_info",
                 "pipeline_info/ensembldownload_software_versions.yml",
                 "repeats",
@@ -55,6 +56,7 @@
                 "GCA_907164925.1.ensembl.2022_02.pep.fa.gz:md5,38ebdcafbac7f7439070be203cd43715",
                 "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai:md5,95b9f6b24f73af293a17c74eea5a8f29",
                 "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi:md5,bc0b925c1b01abaa6f0130750d1e41b0",
+                "GCA_907164925.1.ensembl.2022_02.xref.tsv.gz:md5,68bd92b37c179efa84ecb348ecfb886a",
                 "GCA_907164925.1.ensembl.2022_02.masked.fa.gz:md5,afe44da9a1db9225e8643f82dc5770c3",
                 "GCA_907164925.1.ensembl.2022_02.masked.fa.gz.fai:md5,d2ad6cbd405b8baa792849bdf8c9a158",
                 "GCA_907164925.1.ensembl.2022_02.masked.fa.gz.gzi:md5,829a5e0fe1e139c4360bd5946ad74fc9",
@@ -64,7 +66,7 @@
                 "GCA_907164925.1.ensembl.2022_02.repeats.bed.gz.tbi:md5,8c904f1dc971ad62421bd4565eb7f1ff"
             ]
         ],
-        "timestamp": "2026-11-19T12:12:05.129016274",
+        "timestamp": "2026-11-20T12:13:38.247544626",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

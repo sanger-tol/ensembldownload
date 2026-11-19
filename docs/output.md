@@ -18,7 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Repeat annotation files](#repeat-annotation-files) - Files corresponding to repeat annotation produced by Ensembl
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
-All data files are compressed with `bgzip`.
+All indexable data files are compressed with `bgzip`.
 All Fasta files are indexed with `samtools faidx`, which allows accessing any region of the assembly in constant time.
 All BED files are indexed with tabix in both TBI and CSI modes, unless the sequences are too large.
 
@@ -39,6 +39,7 @@ genes
         ├── GCA_907164925.1.ensembl.2022_02.pep.fa.gz
         ├── GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai
         ├── GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi
+        └── GCA_907164925.1.ensembl.2022_02.xref.tsv.gz
 ```
 
 All files are named after:
@@ -141,6 +142,24 @@ Attributes for feature types:
   - `Parent`: Transcript identifier, format `transcript:<transcript_stable_id>`
   - `protein_id`: Ensembl protein stable ID
   - `version`: Ensembl protein version
+
+#### External references (xrefs)
+
+The `xref.tsv.gz` file is a table mapping gene identifier.
+
+It is a TSV file with these headings:
+
+- `gene_stable_id`. Stable ID of the gene in Ensembl
+- `transcript_stable_id`. Stable ID of the transcript in Ensembl
+- `protein_stable_id`. Stable ID of the protein in Ensembl
+- `xref_id`. The "ID" of the external reference this transcript it mapped to
+- `xref_label`. The "label" (name) of the external reference this transcript it mapped to
+- `description`. The description of the external reference this transcript it mapped to
+- `db_name`. The database where the external reference can be found
+- `info_type`. How the match was derived
+- `source`. Extra information about the source of the match
+- `ensembl_identity`. Percentage identity of the Ensembl sequence (usually empty)
+- `xref_identity`. Percentage identify of the external sequence (usually empty)
 
 ### Repeat annotation files
 
