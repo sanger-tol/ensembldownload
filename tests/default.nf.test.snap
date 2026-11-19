@@ -1,0 +1,45 @@
+{
+    "-profile test": {
+        "content": [
+            1,
+            {
+                "ENSEMBL_GENESET_DOWNLOAD": {
+                    "rsync": "3.4.1"
+                },
+                "Workflow": {
+                    "sanger-tol/ensembldownload": "v3.0.0"
+                }
+            },
+            [
+                "genes",
+                "genes/ensembl",
+                "genes/ensembl/2022_02",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.cdna.fa.gz",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.cdna.fa.gz.fai",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.cdna.fa.gz.gzi",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.genes.gff3.gz",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.genes.gff3.gz.csi",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai",
+                "genes/ensembl/2022_02/GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi",
+                "pipeline_info",
+                "pipeline_info/ensembldownload_software_versions.yml"
+            ],
+            [
+                "GCA_907164925.1.ensembl.2022_02.cdna.fa.gz:md5,7e8c07eefe2242c86e9e390f1de65084",
+                "GCA_907164925.1.ensembl.2022_02.cdna.fa.gz.fai:md5,e9fc4e2e121ec90b252a252ec32a05ff",
+                "GCA_907164925.1.ensembl.2022_02.cdna.fa.gz.gzi:md5,893959eb3b1387db246a5b583c1f5f30",
+                "GCA_907164925.1.ensembl.2022_02.genes.gff3.gz:md5,4a4acb71664a65102706b9a118db8a6c",
+                "GCA_907164925.1.ensembl.2022_02.genes.gff3.gz.csi:md5,fa51f3c6123ba0f0fb9e920b91e5374f",
+                "GCA_907164925.1.ensembl.2022_02.pep.fa.gz:md5,38ebdcafbac7f7439070be203cd43715",
+                "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.fai:md5,95b9f6b24f73af293a17c74eea5a8f29",
+                "GCA_907164925.1.ensembl.2022_02.pep.fa.gz.gzi:md5,bc0b925c1b01abaa6f0130750d1e41b0"
+            ]
+        ],
+        "timestamp": "2026-11-17T16:03:42.040438691",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
+    }
+}
