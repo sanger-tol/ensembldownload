@@ -60,12 +60,12 @@ Osmia_bicornis/iOsmBic2.1_alternate_haplotype,GCA_907164925.1,ensembl,2022_02
 Noctua_fimbriata/ilNocFimb1.1,GCA_905163415.1,braker,2022_03
 ```
 
-| Column               | Description                                                                                                                                                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Column               | Description                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------ |
 | `outdir`             | Output directory for this annotation (evaluated from `--outdir` if a relative path). |
-| `assembly_accession` | Accession number of the assembly to download. Typically of the form `GCA_*.*`.                                                                                            |
-| `annotation_method`  | Name of the method of the geneset.                                                                                                                                        |
-| `geneset_version`    | Version of the geneset, usually in the form `YYYY_MM`.                                                                                                                    |
+| `assembly_accession` | Accession number of the assembly to download. Typically of the form `GCA_*.*`.       |
+| `annotation_method`  | Name of the method of the geneset.                                                   |
+| `geneset_version`    | Version of the geneset, usually in the form `YYYY_MM`.                               |
 
 A samplesheet may contain:
 
