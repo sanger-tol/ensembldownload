@@ -1,4 +1,9 @@
-# ![sanger-tol/ensembldownload](docs/images/sanger-tol-ensembldownload_logo.png)
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-ensembldownload_logo_dark.svg">
+    <img alt="sanger-tol/ensembldownload" src="docs/images/sanger-tol-ensembldownload_logo_light.svg">
+  </picture>
+</h1>
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/sanger-tol/ensembldownload)
 [![GitHub Actions CI Status](https://github.com/sanger-tol/ensembldownload/actions/workflows/nf-test.yml/badge.svg)](https://github.com/sanger-tol/ensembldownload/actions/workflows/nf-test.yml)
