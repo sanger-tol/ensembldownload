@@ -25,6 +25,11 @@
 
 **sanger-tol/ensembldownload** is a pipeline that downloads gene and repeat annotations from Ensembl into a Tree of Life directory structure.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-ensembldownload_metro_map_dark.svg">
+  <img alt="sanger-tol/ensembldownload" src="docs/images/sanger-tol-ensembldownload_metro_map_light.svg">
+</picture>
+
 The pipeline takes a CSV file that contains assembly accession number, output directories, geneset methods and geneset versions.
 The pipeline then downloads from Ensembl the data associated with this geneset.
 All files are compressed with `bgzip`, and indexed with `samtools faidx` or `tabix`.
