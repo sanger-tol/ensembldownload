@@ -56,10 +56,10 @@ More information about this mode on our [pipeline website](https://pipelines.tol
 
 sanger-tol/ensembldownload was originally written by [Matthieu Muffato](https://github.com/muffato).
 
-We thank the following people for their assistance in the development of this pipeline:
+We thank the following people for their assistance in the development of the predecessors of this pipeline:
 
-- [Priyanka Surana](https://github.com/priyanka-surana) for providing reviews.
-- [Tyler Chafin](https://github.com/tkchafin) for updates and maintenance.
+- [Priyanka Surana](https://github.com/priyanka-surana)
+- [Tyler Chafin](https://github.com/tkchafin)
 
 ## Contributions and Support
 
