@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[3.0.0](https://github.com/sanger-tol/ensembldownload/releases/tag/3.0.0)] - Flamboyant Smaug - [2026-11-20]
+## [[3.0.0](https://github.com/sanger-tol/ensembldownload/releases/tag/3.0.0)] - Flamboyant Smaug - [2026-11-23]
 
 _This first version is an hybrid between the now-retired sanger-tol/ensemblgenedownload and
 sanger-tol/ensemblrepeatdownload pipelines.

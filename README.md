@@ -68,6 +68,7 @@ sanger-tol/ensembldownload was originally written by [Matthieu Muffato](https://
 
 We thank the following people for their assistance in the development of the predecessors of this pipeline:
 
+- [Jim Downie](https://github.com/prototaxites)
 - [Priyanka Surana](https://github.com/priyanka-surana)
 - [Tyler Chafin](https://github.com/tkchafin)
 
