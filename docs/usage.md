@@ -1,6 +1,6 @@
 # sanger-tol/ensembldownload: Usage
 
-## :warning: Please read this documentation on the nf-core website: [https://pipelines.tol.sanger.ac.uk/ensembldownload/usage](https://pipelines.tol.sanger.ac.uk/ensembldownload/usage)
+## :warning: Please read this documentation on the sanger-tol website: [https://pipelines.tol.sanger.ac.uk/ensembldownload/usage](https://pipelines.tol.sanger.ac.uk/ensembldownload/usage)
 
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
 
