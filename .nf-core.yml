@@ -8,6 +8,7 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
+    - CODE_OF_CONDUCT.md
   files_unchanged:
     - LICENSE
     - .github/CONTRIBUTING.md
