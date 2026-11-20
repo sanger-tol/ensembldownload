@@ -13,7 +13,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ENSEMBLDOWNLOAD  } from './workflows/ensembldownload'
+include { ENSEMBLDOWNLOAD         } from './workflows/ensembldownload'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ensembldownload_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ensembldownload_pipeline'
 /*
@@ -28,7 +28,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ense
 workflow SANGERTOL_ENSEMBLDOWNLOAD {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    samplesheet // channel: tuple(outdir, assembly_accession, annotation_method, geneset_version)
 
     main:
 
@@ -68,7 +68,7 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     SANGERTOL_ENSEMBLDOWNLOAD (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.inputs
     )
     //
     // SUBWORKFLOW: Run completion tasks
@@ -81,9 +81,3 @@ workflow {
         params.monochrome_logs,
     )
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
