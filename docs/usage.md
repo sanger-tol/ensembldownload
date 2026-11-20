@@ -1,64 +1,89 @@
 # sanger-tol/ensembldownload: Usage
 
+## :warning: Please read this documentation on the sanger-tol website: [https://pipelines.tol.sanger.ac.uk/ensembldownload/usage](https://pipelines.tol.sanger.ac.uk/ensembldownload/usage)
+
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+The pipeline downloads Enembl gene and repeat annotations for one of multiple assemblies.
+It also builds a set of common indices (such as `samtools faidx`, `tabix`).
 
-## Samplesheet input
+## One-off downloads
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+The pipeline accepts command-one line arguments to specify a single genome to download:
+
+- `--assembly_accession`: The accession number of the assembly,
+- `--annotation_method`: The annotation method of the geneset,
+- `--geneset_version`: The geneset version to download,
+- `--outdir`: Where the pipeline runtime information will be stored, and where data will be downloaded (except if absolute paths are given in the samplesheet).
 
 ```bash
---input '[path to samplesheet file]'
+nextflow run sanger-tol/ensembldownload -profile singularity --assembly_accession GCA_905163415.1 --annotation_method braker --geneset_version 2022_03 --outdir Noctua_fimbriata_braker_2022_03
 ```
 
-### Multiple runs of the same sample
+This will launch the pipeline and download the data associated with the `2022_03` _Braker_ annotation of the assembly `GCA_905163415.1` into the `Noctua_fimbriata_braker_2022_03/` directory,
+which will be created if needed.
 
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
+Annotation parameters can be retrieved by browsing the [Ensembl](https://www.ensembl.org/) site.
+
+- Go to the assembly page <https://www.ensembl.org/genome/GCA_905163415.1>
+  and click on the "Get files" button on the right-hand side.
+- From the URL of any link, e.g. `https://ftp.ebi.ac.uk/pub/ensemblorganisms/GCA/905/163/415/1/braker/2022_03/genome`,
+  extract the annotation method and version.
+
+Current annotation represent pipelines:
+
+- `ensembl` for Ensembl's own annotation pipeline
+- `braker` for the [BRAKER2](https://academic.oup.com/nargab/article/3/1/lqaa108/6066535) pipeline
+- `helixer` for the [Helixer](https://doi.org/10.1038/s41592-025-02939-1) pipeline
+- `prokka` for the [Prokka](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153) pipeline
+
+or source databases the annotation is loaded from:
+
+- `refseq` for [RefSeq](https://academic.oup.com/nar/article/49/D1/D1020/6018440)
+- `flybase` for [FlyBase](https://academic.oup.com/genetics/article-lookup/doi/10.1093/genetics/iyad211)
+- `genbank` for [GenBank](https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/gkab1135)
+- `veupathdb` for [VEuPathDB](https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/gkad1003)
+- `wormbase` for [WormBase](https://academic.oup.com/genetics/article-lookup/doi/10.1093/genetics/iyae050)
+- `community` and many `community_*` strings for other annotations pulled from the community
+
+## Bulk download
+
+The pipeline can download multiple genesets at once, by providing them in a `.csv` file through the `--input` parameter.
+It has to be a comma-separated file with four columns, and a header row as shown in the examples below.
 
 ```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
+outdir,assembly_accession,annotation_method,geneset_version
+Asterias_rubens/eAstRub1.3,GCA_902459465.3,ensembl,2020_11
+Osmia_bicornis/iOsmBic2.1_alternate_haplotype,GCA_907164925.1,ensembl,2022_02
+Noctua_fimbriata/ilNocFimb1.1,GCA_905163415.1,braker,2022_03
 ```
 
-### Full samplesheet
+| Column               | Description                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `outdir`             | Output directory for this annotation (evaluated from `--outdir` if a relative path). |
+| `assembly_accession` | Accession number of the assembly to download. Typically of the form `GCA_*.*`.       |
+| `annotation_method`  | Name of the method of the geneset.                                                   |
+| `geneset_version`    | Version of the geneset, usually in the form `YYYY_MM`.                               |
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
+A samplesheet may contain:
 
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
+- multiple genesets of the same species
+- multiple genesets of the same assembly
+- multiple genesets in the same output directory
+- only one row per geneset
 
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
-```
-
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+All samplesheet columns correspond exactly to their corresponding command-line parameter,
+except `outdir` which, if a relative path, is interpreted under `--oudir`.
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
-
-## Running the pipeline
-
-The typical command for running the pipeline is as follows:
 
 ```bash
 nextflow run sanger-tol/ensembldownload --input ./samplesheet.csv --outdir ./results  -profile docker
 ```
 
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
+## Nextflow outputs
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -85,9 +110,10 @@ nextflow run sanger-tol/ensembldownload -profile docker -params-file params.yaml
 with:
 
 ```yaml title="params.yaml"
-input: './samplesheet.csv'
-outdir: './results/'
-<...>
+assembly_accession: "GCA_905163415.1"
+annotation_method: "braker"
+geneset_version: "2022_03"
+outdir: "./results/"
 ```
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
@@ -134,9 +160,6 @@ They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
 If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
-- `test`
-  - A profile with a complete configuration for automated testing
-  - Includes links to test data so needs no other parameters
 - `docker`
   - A generic configuration profile to be used with [Docker](https://docker.com/)
 - `singularity`
@@ -153,6 +176,12 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
   - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow `24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
+- `test`
+  - A profile with a minimal configuration for automated testing
+  - Corresponds to defining the assembly to download as command-line parameters so needs no other parameters
+- `test_full`
+  - A profile with a complete configuration for automated testing
+  - Corresponds to defining the assembly to download as a CSV file so needs no other parameters
 
 ### `-resume`
 
