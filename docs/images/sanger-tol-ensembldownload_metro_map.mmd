@@ -1,0 +1,25 @@
+%%metro title: Ensembl downloads
+%%metro style: dark
+%%metro line_order: span
+%%metro line: main | Main | #2db572
+%%metro marker: start | square, open
+%%metro marker_legend: square, open | Start
+
+graph LR
+    subgraph download [Download from Ensembl]
+        start([])
+        ensembl_genome_download([Masked genome])
+        ensembl_geneset_download([Genes])
+        start -->|main| ensembl_genome_download
+        start -->|main| ensembl_geneset_download
+    end
+
+    subgraph soft_masked_fasta_repeats [Repeats Coordinates]
+        mask_softmask2bed([Soft-Mask to BED])
+        bgziptabix([Bgzip and Tabix])
+
+        mask_softmask2bed -->|main| bgziptabix
+    end
+
+    %% Inter-section edges
+    ensembl_genome_download -->|main| mask_softmask2bed
