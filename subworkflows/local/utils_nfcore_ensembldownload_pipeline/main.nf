@@ -204,7 +204,7 @@ def toolBibliographyText() {
     def reference_text = [
             "<li>Bonfield, James K. et al. 2021. ‘HTSlib: C library for reading/writing high-throughput sequencing data‘. GigaScience. 10(2). doi: 10.1093/gigascience/giab007.</li>",
             "<li>Danecek P, Bonfield JK, Liddle J, Marshall J, Ohan V, Pollard MO, Whitwham A, Keane T, McCarthy SA, Davies RM, Li H. Twelve years of SAMtools and BCFtools. Gigascience. 2021 Feb 16;10(2):giab008. doi: 10.1093/gigascience/giab008. PMID: 33590861; PMCID: PMC7931819.</li>",
-            "<li>Li, Heng. "SeqTK v1.4" <a href='https://github.com/lh3/seqtk'>GitHub, 2023</a></li>.",
+            "<li>Li, Heng. SeqTK v1.4 <a href='https://github.com/lh3/seqtk'>GitHub, 2023</a></li>.",
             "<li>Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011 Mar 1;27(5):718-9. doi: 10.1093/bioinformatics/btq671. Epub 2011 Jan 5. PMID: 21208982; PMCID: PMC3042176.</li>"
         ].join(' ').trim()
 
