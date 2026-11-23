@@ -1,6 +1,5 @@
 // Module that downloads all necessary geneset files from Ensembl.
 // The module checks that the MD5 checksums match before releasing the data.
-// It also uncompresses the files, since we want bgzip compression.
 process ENSEMBL_GENESET_DOWNLOAD {
     tag "${meta.id}"
     label 'process_single'
