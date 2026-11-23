@@ -1,4 +1,9 @@
-# ![sanger-tol/ensembldownload](docs/images/sanger-tol-ensembldownload_logo.png)
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-ensembldownload_logo_dark.svg">
+    <img alt="sanger-tol/ensembldownload" src="docs/images/sanger-tol-ensembldownload_logo_light.svg">
+  </picture>
+</h1>
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/sanger-tol/ensembldownload)
 [![GitHub Actions CI Status](https://github.com/sanger-tol/ensembldownload/actions/workflows/nf-test.yml/badge.svg)](https://github.com/sanger-tol/ensembldownload/actions/workflows/nf-test.yml)
@@ -19,6 +24,11 @@
 ## Introduction
 
 **sanger-tol/ensembldownload** is a pipeline that downloads gene and repeat annotations from Ensembl into a Tree of Life directory structure.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-ensembldownload_metro_map_dark.svg">
+  <img alt="sanger-tol/ensembldownload" src="docs/images/sanger-tol-ensembldownload_metro_map_light.svg">
+</picture>
 
 The pipeline takes a CSV file that contains assembly accession number, output directories, geneset methods and geneset versions.
 The pipeline then downloads from Ensembl the data associated with this geneset.
@@ -58,6 +68,7 @@ sanger-tol/ensembldownload was originally written by [Matthieu Muffato](https://
 
 We thank the following people for their assistance in the development of the predecessors of this pipeline:
 
+- [Jim Downie](https://github.com/prototaxites)
 - [Priyanka Surana](https://github.com/priyanka-surana)
 - [Tyler Chafin](https://github.com/tkchafin)
 
